@@ -1,5 +1,25 @@
 #!/usr/bin/env python
+###############################################################################
+"""
+Example script to inject LHE files in DBS3
+For real usage various "string" defined here needs to
+be changed and input file list has to be given with size,
+number of events, and checksum
 
+Run it like crab2:
+
+source /afs/cern.ch/cms/LCG/LCG-2/UI/cms_ui_env.sh
+cmsrel CMSSW_5_3_1 (or whatever recent release)
+cd CMSSW_5_3_1
+cmsenv
+source /afs/cern.ch/cms/ccs/wm/scripts/Crab/crab.sh
+voms-proxy-init -voms cms
+
+./InsertFiles.py
+
+
+"""
+###############################################################################
 import pprint
 from dbs.apis.dbsClient import DbsApi
 import uuid
@@ -59,7 +79,7 @@ def addFilesToBlock(blockDict, files):
 #pick a DBS3 instance
 #instance = 'dev'
 instance = 'int'
-instance = 'prod'
+#instance = 'prod'
 
 
 if instance=='dev':
