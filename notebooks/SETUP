@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# setup env for using Jupyter notebooks for CRAB testings
+# tested to work on lxplus8
+# allows to work with Rucio and DBS too, besides CRAB and WMCore
+# requires VOMS proxy to exists and $X509_USER_PROXY to be defined
+echo "X509_USER_PROXY is needed: $X509_USER_PROXY"
+# the various directories in /afs/cern.ch/user/b/belforte/WORK/CRAB3/
+# are just clones of the corresponding repos
+# beware that if you use CRABClient you need to make WMCOre point to the dummy one
+
+cd ~/WORK/CMSSW/SL7/CMSSW_12_2_1/; eval `scram runtime -sh`; cd -
+export PYTHONPATH=$PYTHONPATH:/cvmfs/cms.cern.ch/rucio/x86_64/slc7/py3/current/lib/python3.6/site-packages/
+export PYTHONPATH=/afs/cern.ch/user/b/belforte/WORK/CRAB3/CRABServer/src/python:$PYTHONPATH
+export PYTHONPATH=/afs/cern.ch/user/b/belforte/WORK/CRAB3/WMCore/src/python:$PYTHONPATH
+export PYTHONPATH=/afs/cern.ch/user/b/belforte/WORK/CRAB3/CRABClient/src/python:$PYTHONPATH
+export PYTHONPATH=/afs/cern.ch/user/b/belforte/WORK/CRAB3/DBS/Client/src/python:$PYTHONPATH
+export PYTHONPATH=/afs/cern.ch/user/b/belforte/WORK/CRAB3/DBS/PycurlClient/src/python:$PYTHONPATH
+export RUCIO_HOME=/cvmfs/cms.cern.ch/rucio/current/
+export RUCIO_ACCOUNT=`whoami` 
+
+echo "start Jupyter with:\n jupyter notebook --no-browser --port 4448"
+
